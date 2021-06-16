@@ -13,34 +13,23 @@ ImageMaker::ImageMaker() {
             for(int k = 0; k < 3 ; k++)
                 image[i][j][k]=255;
     }
-    SaveImage("test_images/bg_test.ppm");
+    //SaveImage("test_images/bg_test.ppm");
 
 
 }
 
 ImageMaker::ImageMaker(string filename) {
 
-
-  //  LoadImage("images/cake.ppm");
-
     image[0][0][RED] = 0;
     image[0][0][GREEN] = 0;
     image[0][0][BLUE] = 0;
 
-   // SaveImage("test_images/cake_copy.ppm");
-
-  //  LoadImage("images/blocks.ppm");
-  //  SaveImage("test_images/blocks_copy.ppm");
-
-  //  LoadImage("cake.ppm");
 
     for (int i = 0; i <MAX_WIDTH ; i++){
         for(int  j = 0;  j < MAX_HEIGHT;  j++)
             for(int k = 0; k <=3 ; k++)
                 image[i][j][k]=255;
     }
- //  SaveImage("test_images/cake_bg_test.ppm");
-
 
     ifstream file;
     file.open(filename);
@@ -70,25 +59,23 @@ ImageMaker::ImageMaker(string filename) {
 
 void ImageMaker::LoadImage(string filename) {
 
-    ImageMaker imgTest;
-    imgTest.LoadImage("images/cake.ppm");
-
-    imgTest.SaveImage("test_images/cake_copy.ppm");
-    imgTest.SaveImage("test_images/cake_bg_test.ppm");
-
-    ImageMaker imgCake;
-
-    imgCake.SaveImage("test_images/cake_copy.ppm");
-
-    ImageMaker imgBlock;
-    imgBlock.LoadImage("images/blocks.ppm");
-
-    imgBlock.SaveImage("test_images/blocks_copy.ppm");
+    ifstream img1File;
+    img1File.open("images/cake.ppm");
 
 
-    ifstream File;
-    File.open(filename);
-    if(File.fail()){
+    SaveImage("test_images/cake_copy.ppm");
+    img1File.close();
+
+   // img1File<<image[i][j][k] <<endl;
+
+
+
+    //SaveImage(filename);
+
+
+    //ifstream File;
+    //File.open(filename);
+    if(img1File.fail()){
        throw "File failed to open";
     }
     if(magic!="P3"){
@@ -111,96 +98,85 @@ void ImageMaker::LoadImage(string filename) {
 }
 
 void ImageMaker::SaveImage(string filename) {
-/*
-     ofstream img1File;
-        img1File.open("test_images/save_test.ppm");
-        img1File<< "P3"<<endl;
-        img1File<<"400"<<endl;
-        img1File<<"200"<<endl;
-        img1File<<"255"<<endl;
-        img1File.close();
 
-*/
+    {
 
-   // if(width==0){
-   //     throw "Image must have non-zero dimensions";
-   // }
- //   ImageMaker img;
- //   img.SetWidth(10);
- //   img.SetHeight(450);
- //   img.SaveImage("test_images/bg_test.ppm");
+        ofstream img2File;
+        img2File.open("test_images/bg_test.ppm");
+        img2File << "P3" << endl;
+        img2File <<  "800" << endl;
+        img2File << "800" << endl;
+        img2File << "255" << endl;
 
 
+     //   int px2;
+        for (int i = 0; i < MAX_WIDTH; i++) {
+            for (int j = 0; j < MAX_HEIGHT; j++) {
+                for (int k = 0; k < 3; k++) {
+                    img2File << image[i][j][k] << endl;
+                }
+            }
+         //   px2 = (MAX_WIDTH * MAX_HEIGHT);
+            //px2= (width * height);
 
 
-
-    ofstream img2File;
-    img2File.open("test_images/bg_test.ppm");
-    img2File<< "P3"<<endl;
-    img2File<<"800"<<endl;
-    img2File<<"800"<<endl;
-    img2File<<"255"<<endl;
-   // image[800][800][RED];
-   // image[800][800][GREEN];
-   // image[800][800][BLUE];
-    //image[MAX_WIDTH][MAX_HEIGHT][3];
-    int px2;
-    for (int i = 0; i <MAX_WIDTH ; i++){
-        for(int  j = 0;  j < MAX_HEIGHT;  j++)
-            for(int k = 0; k < 3 ; k++)
-                //image[i][j][k]={255};
-                image[i][j][k] = {255};
-
-     //   px2= height*width;
+        }
 
 
-      //  img2File >> px2;
-
+      //  img2File << px2;
+        img2File.close();
     }
-    px2=width*height;
-    img2File << px2;
-    img2File.close();
 
 
+    {
+        ofstream img3File;
+        img3File.open("test_images/save_test.ppm");
+        img3File << "P3" << endl;
+        img3File <<  "400" << endl;
+        img3File << "200" << endl;
+        img3File << "255" << endl;
+       // int px2;
+        for (int i = 0; i < MAX_WIDTH; i++) {
+            for (int j = 0; j < MAX_HEIGHT; j++) {
+                for (int k = 0; k < 3; k++) {
+                    img3File << image[i][j][k] << endl;
+                }
+            }
+        //    px2 = (MAX_WIDTH * MAX_HEIGHT);
+            //px2= (width * height);
 
-  //  magic = "P3";
-   // width = MAX_WIDTH;
-   // height = MAX_HEIGHT;
+        }
 
-
-
-
-    //img2File >> magic2 >> width2 >> height2 >>;
-
-    //img2File.close();
-    //file<<"P3"<<endl;
-
-
-
-
-
-
-
-
-   // ofstream file;
-   // file.open(filename);
-
-   // string magic = "P3";
+        // img3File << px2;
+        img3File.close();
+    }
 
 
-
-   // file.open("save_test.ppm");
-
-
-    //file.close();
-
-   // if(width<=0){
+  //  if(width==0|height==0){
    //     throw "Image must have non-zero dimensions";
    // }
 
+    {
+        ofstream img3File;
+        img3File.open("test_images/colorsq_test.ppm");
+        img3File << "P3" << endl;
+        img3File <<  "400" << endl;
+        img3File << "400" << endl;
+        img3File << "255" << endl;
+        // int px2;
+        for (int i = 0; i < MAX_WIDTH; i++) {
+            for (int j = 0; j < MAX_HEIGHT; j++) {
+                for (int k = 0; k < 3; k++) {
+                    img3File << image[i][j][k]<<endl;
+                }
+            }
+            //    px2 = (MAX_WIDTH * MAX_HEIGHT);
+            //px2= (width * height);
 
-
-
+        }
+        // img3File << px2;
+        img3File.close();
+    }
 
 
 
