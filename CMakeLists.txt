@@ -58,3 +58,7 @@ set_property(TARGET Save_Load_Test PROPERTY CXX_STANDARD 11)
 set_property(TARGET DrawPixel_Test PROPERTY CXX_STANDARD 11)
 set_property(TARGET DrawRectangle_Test PROPERTY CXX_STANDARD 11)
 set_property(TARGET DrawLine_Test PROPERTY CXX_STANDARD 11)
+
+
+# Used for ImageMaker_demo
+add_executable(ImageMaker_demo ImageMaker_demo.cpp ImageMaker.cpp)

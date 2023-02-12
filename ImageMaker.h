@@ -68,15 +68,15 @@ public:
 
 private:
     string magic;
-    int width{};
-    int height{};
-    int pen_red{};    // Used by draw functions
-    int pen_green{};  // Used by draw functions
-    int pen_blue{};   // Used by draw functions
+    int width;
+    int height;
+    int pen_red;    // Used by draw functions
+    int pen_green;  // Used by draw functions
+    int pen_blue;   // Used by draw functions
     bool PointInBounds(int x, int y);  // Not a bad idea to implement
 
                //   x          y
-    short image[MAX_WIDTH][MAX_HEIGHT][3]{};
+    short image[MAX_WIDTH][MAX_HEIGHT][3];
 };
 
 #endif //IMAGEMAKER_H

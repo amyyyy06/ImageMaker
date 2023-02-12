@@ -153,17 +153,21 @@ void gradient_square() {
 }
 
 int main() {
+    ImageMaker img("images/bg.ppm");
+    std::cout << "height: " << img.GetHeight() << endl;
+    std::cout << "width: " << img.GetWidth() << endl;
+    img.SaveImage("TESTSAVE.ppm");
 
-    // Feel free to add your own code here for testing purposes.
-
-    demo_msg();         // Welcome message
-
-    cout << "Drawing house to demo DrawLine and DrawRectangle." << endl;
-    draw_house();       // Demos DrawLine and DrawRectangle
-
-    cout << "Drawing fractal and gradient square to demo DrawPixel." << endl;
-    chaos_game();       // Demos DrawPixel
-    gradient_square();  // Demos DrawPixel
+//    // Feel free to add your own code here for testing purposes.
+//
+//    demo_msg();         // Welcome message
+//
+//    cout << "Drawing house to demo DrawLine and DrawRectangle." << endl;
+//    draw_house();       // Demos DrawLine and DrawRectangle
+//
+//    cout << "Drawing fractal and gradient square to demo DrawPixel." << endl;
+//    chaos_game();       // Demos DrawPixel
+//    gradient_square();  // Demos DrawPixel
     return 0;
 }
 

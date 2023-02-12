@@ -3,34 +3,52 @@
 
 // Your code goes here...
 ImageMaker::ImageMaker() {
-    image[0][0][RED] = 0;
-    image[0][0][GREEN] = 0;
-    image[0][0][BLUE] = 0;
+    //using constructor delegation
+   // ImageMaker(""){}
+
+    //set private variable to 0
+    width = 0;
+    height = 0;
+    pen_red = 0;
+    pen_green = 0;
+    pen_blue = 0;
+    magic = "P3";
 
 
-    for (int i = 0; i <MAX_WIDTH ; i++){
-        for(int  j = 0;  j < MAX_HEIGHT;  j++)
-            for(int k = 0; k < 3 ; k++)
-                image[i][j][k]=255;
+// set every value in the image variable to 225
+
+    for (int w = 0; w != MAX_WIDTH; w++){
+        for(int  h = 0;  h != MAX_HEIGHT;  h++)
+            for(int k = 0; k != 3 ; k++)
+                image[w][h][k]=255;
     }
-    //SaveImage("test_images/bg_test.ppm");
 
 
 }
 
 ImageMaker::ImageMaker(string filename) {
+    //set private variable to 0
+    width = 0;
+    height = 0;
+    pen_red = 0;
+    pen_green = 0;
+    pen_blue = 0;
+    magic = "P3";
 
-    image[0][0][RED] = 0;
-    image[0][0][GREEN] = 0;
-    image[0][0][BLUE] = 0;
 
+// set every value in the image variable to 225
 
-    for (int i = 0; i <MAX_WIDTH ; i++){
-        for(int  j = 0;  j < MAX_HEIGHT;  j++)
-            for(int k = 0; k <=3 ; k++)
-                image[i][j][k]=255;
+    for (int w = 0; w != MAX_WIDTH; w++){
+        for(int  h = 0;  h != MAX_HEIGHT;  h++)
+            for(int k = 0; k != 3 ; k++)
+                image[w][h][k]=255;
     }
 
+    if (filename != ""){
+        LoadImage(filename);
+    }
+
+/*
     ifstream file;
     file.open(filename);
     if (file.fail()) {
@@ -53,51 +71,108 @@ ImageMaker::ImageMaker(string filename) {
         throw "Color value invalid";
     }
     //}
-
+*/
 }
 
 
 void ImageMaker::LoadImage(string filename) {
-
+// open on existing ppm image file
     ifstream img1File;
-    img1File.open("images/cake.ppm");
+    img1File.open(filename);
 
-
-    SaveImage("test_images/cake_copy.ppm");
-    img1File.close();
-
-   // img1File<<image[i][j][k] <<endl;
-
-
-
-    //SaveImage(filename);
-
-
-    //ifstream File;
-    //File.open(filename);
     if(img1File.fail()){
        throw "File failed to open";
     }
-    if(magic!="P3"){
+
+    //store data into class imageMaker
+    // read magic string
+
+    string s;
+    img1File >> s;
+
+    if(s !="P3"){
         throw "Bad magic number";
     }
+
+    int width, height, max_color;
+    img1File >> width >> height >> max_color;
+
+    SetWidth(width);
+    SetHeight(height);
+
+    //check max_color
+    if( max_color !=255){
+        throw "Max color range not 255";
+    }
+
+    //read pixel data
+    //for each x, y coordinate
+
+    for(int h = 0; h != height; h++){
+        for(int w = 0; w != width; w++){
+            int newR, newG, newB;
+            // read RGB data
+            img1File >> newR >> newG >> newB;
+            //check RGB data
+
+            if(newR < 0 || newR > 255 || newG < 0|| newG > 255 || newB < 0 || newB >255){
+                throw "Color value invalid";
+            }
+
+            // set the pixel color
+
+            image[w][h][RED] = newR;
+            image[w][h][GREEN] = newG;
+            image[w][h][BLUE] = newB;
+        }
+
+    }
+  /*
     if(width < 0 || width > MAX_WIDTH){
         throw "Width out of bounds";
     }
     if(height < 0 || height > MAX_HEIGHT){
         throw "Height out of bounds";
     }
-    if(MAX_COLOR !=255){
-        throw "Max color range not 255";
-    }
+
     if(width*height<0){
         throw "Color value invalid";
     }
-
+*/
+    img1File.close();
 
 }
 
 void ImageMaker::SaveImage(string filename) {
+
+    ofstream outFile;
+    outFile.open(filename);
+    //write magic number to file
+    outFile << "P3\n";
+    //check width and height to file
+    outFile << GetWidth() << " " << GetHeight() << endl;
+
+
+    //write max color value
+    outFile << MAX_COLOR << endl;
+    //write pixel data
+    //For each x, y coordinate
+    for (int h = 0; h != height; h++){ //getHeight()
+        for(int w = 0; w != width; w++){ //getWidth()
+            //write the pixel color
+            outFile << image[w][h][RED] << " ";
+            outFile << image[w][h][GREEN] << " ";
+            outFile << image[w][h][BLUE] << " ";
+        }
+
+        outFile << " " << endl;
+    }
+
+    //finish writing file
+    outFile.close();
+
+
+    /*
 
     {
 
@@ -178,55 +253,56 @@ void ImageMaker::SaveImage(string filename) {
         img3File.close();
     }
 
-
+*/
 
 }
 
 int ImageMaker::GetWidth() {
-    return 0;
+    return width;
 }
 
 int ImageMaker::GetHeight() {
-    return 0;
+    return height;
 }
 
 void ImageMaker::SetWidth(int width) {
-    if(0 > width || width > MAX_WIDTH){
+    if(width < 0 || width > MAX_WIDTH){
         throw "Width out of bounds";
     }
-
+    this->width=width;
 }
 
 void ImageMaker::SetHeight(int height) {
-    if(0 > height || height > MAX_HEIGHT){
+    if(height < 0 || height > MAX_HEIGHT){
         throw "Height out of bounds";
     }
-
+    this->height = height;
 }
 
 int ImageMaker::GetPenRed() {
-    return 0;
+    return pen_red;
 }
 
 int ImageMaker::GetPenGreen() {
-    return 0;
+    return pen_green;
 }
 
 int ImageMaker::GetPenBlue() {
-    return 0;
+    return pen_blue;
 }
 
 void ImageMaker::SetPenRed(int newR) {
-    if(newR<0||MAX_COLOR<newR){
+    if(newR < 0 || MAX_COLOR < newR){
         throw "Color value invalid";
     }
-
+    pen_red = newR;
 }
 
 void ImageMaker::SetPenGreen(int newG) {
     if(newG<0||MAX_COLOR<newG){
         throw "Color value invalid";
     }
+    pen_green = newG;
 
 }
 
@@ -234,6 +310,7 @@ void ImageMaker::SetPenBlue(int newB) {
     if(newB<0||MAX_COLOR<newB){
         throw "Color value invalid";
     }
+    pen_blue = newB;
 
 }
 
