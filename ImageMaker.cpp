@@ -227,10 +227,10 @@ void ImageMaker::DrawRectangle(int x1, int y1, int x2, int y2) {
         swap(y1, y2);
     }
 
-    for(int x = x1; x <= x2; x++){
+    for(int x = x1; x <= x2; x++){ //horizontal
         DrawLine(x, y1, x, y2);
     }
-    for(int y = y1; y <= y2; y++){
+    for(int y = y1; y <= y2; y++){ //vertical
         DrawLine(x1, y, x2, y);
     }
 
