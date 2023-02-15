@@ -153,9 +153,12 @@ void gradient_square() {
 }
 
 int main() {
-    ImageMaker img("images/bg.ppm");
-    std::cout << "height: " << img.GetHeight() << endl;
-    std::cout << "width: " << img.GetWidth() << endl;
+    ImageMaker img; //ImageMaker img("images/bg.ppm");
+    img.SetWidth(10);
+    img.SetHeight(10);
+//    std::cout << "height: " << img.GetHeight() << endl;
+//    std::cout << "width: " << img.GetWidth() << endl;
+    img.DrawLine(0,0,1,1);
     img.SaveImage("TESTSAVE.ppm");
 
 //    // Feel free to add your own code here for testing purposes.
