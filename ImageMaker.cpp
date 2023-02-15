@@ -386,7 +386,6 @@ void ImageMaker::DrawRectangle(int x1, int y1, int x2, int y2) {
     for(int x = x1; x <= x2; x++){
         DrawLine(x, y1, x, y2);
     }
-
     for(int y = y1; y <= y2; y++){
         DrawLine(x1, y, x2, y);
     }
