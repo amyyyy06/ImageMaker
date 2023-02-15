@@ -48,30 +48,6 @@ ImageMaker::ImageMaker(string filename) {
         LoadImage(filename);
     }
 
-/*
-    ifstream file;
-    file.open(filename);
-    if (file.fail()) {
-        throw "File failed to open";
-    }
-    if (magic != "P3") {
-        throw "Bad magic number";
-    }
-    if ( width < 0 || width > MAX_WIDTH) {
-        throw "Width out of bounds";
-
-    }
-    if (height < 0 || height > MAX_HEIGHT) {
-        throw "Height out of bounds";
-        }
-    if (MAX_COLOR !=255 ) {
-        throw "Max color range not 255";
-    }
-    if (width*height<0) {
-        throw "Color value invalid";
-    }
-    //}
-*/
 }
 
 
@@ -127,18 +103,7 @@ void ImageMaker::LoadImage(string filename) {
         }
 
     }
-  /*
-    if(width < 0 || width > MAX_WIDTH){
-        throw "Width out of bounds";
-    }
-    if(height < 0 || height > MAX_HEIGHT){
-        throw "Height out of bounds";
-    }
 
-    if(width*height<0){
-        throw "Color value invalid";
-    }
-*/
     img1File.close();
 
 }
@@ -176,89 +141,6 @@ void ImageMaker::SaveImage(string filename) {
     //finish writing file
     outFile.close();
 
-
-    /*
-
-    {
-
-        ofstream img2File;
-        img2File.open("test_images/bg_test.ppm");
-        img2File << "P3" << endl;
-        img2File <<  "800" << endl;
-        img2File << "800" << endl;
-        img2File << "255" << endl;
-
-
-     //   int px2;
-        for (int i = 0; i < MAX_WIDTH; i++) {
-            for (int j = 0; j < MAX_HEIGHT; j++) {
-                for (int k = 0; k < 3; k++) {
-                    img2File << image[i][j][k] << endl;
-                }
-            }
-         //   px2 = (MAX_WIDTH * MAX_HEIGHT);
-            //px2= (width * height);
-
-
-        }
-
-
-      //  img2File << px2;
-        img2File.close();
-    }
-
-
-    {
-        ofstream img3File;
-        img3File.open("test_images/save_test.ppm");
-        img3File << "P3" << endl;
-        img3File <<  "400" << endl;
-        img3File << "200" << endl;
-        img3File << "255" << endl;
-       // int px2;
-        for (int i = 0; i < MAX_WIDTH; i++) {
-            for (int j = 0; j < MAX_HEIGHT; j++) {
-                for (int k = 0; k < 3; k++) {
-                    img3File << image[i][j][k] << endl;
-                }
-            }
-        //    px2 = (MAX_WIDTH * MAX_HEIGHT);
-            //px2= (width * height);
-
-        }
-
-        // img3File << px2;
-        img3File.close();
-    }
-
-
-  //  if(width==0|height==0){
-   //     throw "Image must have non-zero dimensions";
-   // }
-
-    {
-        ofstream img3File;
-        img3File.open("test_images/colorsq_test.ppm");
-        img3File << "P3" << endl;
-        img3File <<  "400" << endl;
-        img3File << "400" << endl;
-        img3File << "255" << endl;
-        // int px2;
-        for (int i = 0; i < MAX_WIDTH; i++) {
-            for (int j = 0; j < MAX_HEIGHT; j++) {
-                for (int k = 0; k < 3; k++) {
-                    img3File << image[i][j][k]<<endl;
-                }
-            }
-            //    px2 = (MAX_WIDTH * MAX_HEIGHT);
-            //px2= (width * height);
-
-        }
-        // img3File << px2;
-        img3File.close();
-    }
-
-*/
 
 }
 
@@ -330,48 +212,10 @@ void ImageMaker::DrawPixel(int x, int y) {
 
 
 
-/*
-    for (int x = 0; x != height; x++){
-        for(int y = 0; y != width; y++){
-            image[y][x][RED] = pen_red;
-            image[y][x][GREEN] = pen_green;
-            image[y][x][BLUE] = pen_blue;
-
-        }
-
-        if(x > height|| y > width){
-            throw "Point out of bounds";
-        }
-
-
-    }
-
-*/
-
-  /*  if(x<0){
-        throw "Point out of bounds";
-    }
-    if(y<0){
-        throw "Point out of bounds";
-    }
-    if(x < 0 && y < 0){
-        throw "Point out of bounds";
-    }
-    if(x == 0 && y == 0){
-        throw "Point out of bounds";
-    }
-*/
-
-
-
-
 }
 
 void ImageMaker::DrawRectangle(int x1, int y1, int x2, int y2) {
-    //DrawLine(1,2,5,3);
-   // if(){
-    //    throw "Point out of bounds";
-    //}
+
     if(x1 < 0 || x1 > width || y1 < 0 || y1 > height || x2 < 0|| x2 > width || y2 < 0 || y2 > height){
         throw "Point out of bounds";
     }
@@ -392,18 +236,11 @@ void ImageMaker::DrawRectangle(int x1, int y1, int x2, int y2) {
 
 
 
-    //DrawLine(x1, x2, y1, y2);
-
-   // for(int x = x1; x <= x2; x++){
-   //     DrawLine(x1, x2, y1, y2);
-   // }
-
-
 }
 
 void ImageMaker::DrawLine(int x1, int y1, int x2, int y2) {
-    float m, b, y, x, mm, xx, yy, bb;
-    float dx, dy, dxx, dyy;
+    float m, b, y;
+    float dx, dy;
 
     if(x1 < 0 || x1 > width || y1 < 0 || y1 > height || x2 < 0|| x2 > width || y2 < 0 || y2 > height){
         throw "Point out of bounds";
